@@ -7,24 +7,24 @@ TODO: Update README
   "GET": [
     {
       "path": "/api",
-      "action": "welcome"
+      "func": "welcome"
     },
     {
       "path": "/api/user/:id",
       "middlewares": ["authorize"],
-      "action": "user"
+      "func": "user"
     }
   ],
   "POST": [
     {
       "path": "/auth",
       "middlewares": ["authenticate"],
-      "action": "authenticate"
+      "func": "authenticate"
     },
     {
       "path": "/api/user",
       "middlewares": ["authorize"],
-      "action": "user"
+      "func": "user"
     }
   ],
   "PUT": [],
