@@ -1,0 +1,18 @@
+{
+  "name": "simple-restful-api-gateway",
+  "version": "0.0.1",
+  "description": "Simple RESTful API Gateway",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "author": "thinkholic <mailtokasun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
