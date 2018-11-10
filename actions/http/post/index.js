@@ -1,9 +1,6 @@
-const authenticate = require("./authenticate");
-const user = require("./user");
-
 const post = {
-  authenticate,
-  user
+  authenticate: require("./authenticate"),
+  user: require("./user")
 };
 
 module.exports = post;

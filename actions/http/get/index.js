@@ -1,9 +1,6 @@
-const welcome = require("./welcome");
-const user = require("./user");
-
 const get = {
-  welcome,
-  user
+  welcome: require("./welcome"),
+  user: require("./user")
 };
 
 module.exports = get;
