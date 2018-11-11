@@ -1,9 +1,7 @@
 const jwt = require("jsonwebtoken");
-const env = require("../env");
 
 const authorize = (req, res, next) => {
   // Format: Authorization: Bearer <access_token>
-
   // Read header for bearerToken
   const authHeader = req.headers["authorization"];
   if (typeof authHeader !== "undefined") {
@@ -11,7 +9,8 @@ const authorize = (req, res, next) => {
 
     // Verify bearerToken
     try {
-      const authData = jwt.verify(bearerToken, env.SECRET_KEY);
+      const { SECRET_KEY } = req.config;
+      const authData = jwt.verify(bearerToken, SECRET_KEY);
       // TODO: Get decoded authData and verify it with the database
       // If user verified continue.
       // Otherwise, teject.
@@ -32,7 +31,7 @@ const authorize = (req, res, next) => {
       res.status(403).send({
         status: {
           code: 403,
-          message: "Forbidden x"
+          message: "Forbidden"
         },
         error
       });
@@ -42,7 +41,7 @@ const authorize = (req, res, next) => {
     res.status(403).send({
       status: {
         code: 403,
-        message: "Forbidden y"
+        message: "Forbidden"
       }
     });
   }
