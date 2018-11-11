@@ -8,7 +8,7 @@ You just need to update `config.json` and put respective logics in `handles/http
 
 See examples here;
 
-** config.json **
+**config.json**
 
 ```json
 {
@@ -40,7 +40,7 @@ See examples here;
 }
 ```
 
-** handlers/http/get/user.js **
+**handlers/http/get/user.js**
 
 ```js
 const user = (req, res) => {
@@ -53,7 +53,7 @@ const user = (req, res) => {
 module.exports = user;
 ```
 
-** middlewares/authenticate.js **
+**middlewares/authenticate.js**
 
 ```js
 // Mock data
