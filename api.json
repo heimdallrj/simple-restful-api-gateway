@@ -1,0 +1,27 @@
+{
+  "GET": [
+    {
+      "path": "/api",
+      "func": "welcome"
+    },
+    {
+      "path": "/api/user/:id",
+      "middlewares": ["authorize", "database"],
+      "func": "user"
+    }
+  ],
+  "POST": [
+    {
+      "path": "/auth",
+      "middlewares": ["authenticate"],
+      "func": "authenticate"
+    },
+    {
+      "path": "/api/user",
+      "middlewares": ["authorize"],
+      "func": "user"
+    }
+  ],
+  "PUT": [],
+  "DELETE": []
+}
