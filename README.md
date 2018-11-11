@@ -8,7 +8,7 @@ You just need to update `config.json` and put respective logics in `handles/http
 
 See examples here;
 
-**config.json**
+**api.json**
 
 ```json
 {
@@ -19,7 +19,7 @@ See examples here;
     },
     {
       "path": "/api/user/:id",
-      "middlewares": ["authorize"],
+      "middlewares": ["authorize", "database"],
       "func": "user"
     }
   ],
@@ -44,8 +44,15 @@ See examples here;
 
 ```js
 const user = (req, res) => {
+  // Get database instance.
+  const db = req.database;
+
+  // Access application configs.
+  const config = req.config;
+
   // params: id
   const userId = req.params.id;
+
   // TODO: Should get user info by id and return
   res.json({ message: `User data of ${userId}`, ...req.params });
 };
