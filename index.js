@@ -4,7 +4,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const compression = require("compression");
 
-const { getHandlers, getMiddlewares, getRouteConfigs } = require("./core");
+const {
+  getHandlers,
+  getCoreHandlers,
+  getMiddlewares,
+  getRouteConfigs
+} = require("./core");
 const { PORT } = require("./config");
 
 // Create app instance.
@@ -13,6 +18,7 @@ const app = express();
 const middlewares = getMiddlewares();
 const routeConfigs = getRouteConfigs();
 const handlers = getHandlers();
+const coreHandlers = getCoreHandlers();
 
 // Initializing default middlewares
 app.use(cors());
@@ -31,16 +37,27 @@ const methods = Object.keys(routeConfigs);
 methods.forEach(methodKey => {
   const method = routeConfigs[methodKey];
   method.forEach(config => {
-    const { path, func } = config;
-    const configMiddlewares = config.middlewares || [];
-    const middlewareArray = configMiddlewares.map(m => middlewares[m]);
-
+    const { path, type, func } = config;
     const methodKeyLowerCased = methodKey.toLowerCase();
-    app[methodKeyLowerCased](
-      path,
-      [...middlewareArray],
-      handlers[methodKeyLowerCased][func]
-    );
+
+    if (!type || type === "default") {
+      const configMiddlewares = config.middlewares || [];
+      const middlewareArray = configMiddlewares.map(m => middlewares[m]);
+
+      app[methodKeyLowerCased](
+        path,
+        [...middlewareArray],
+        handlers[methodKeyLowerCased][func]
+      );
+    }
+
+    if (type === "proxy") {
+      const { endpoint } = config;
+      app[methodKeyLowerCased](
+        path,
+        coreHandlers[methodKeyLowerCased].proxy.bind(null, config)
+      );
+    }
   });
 });
 

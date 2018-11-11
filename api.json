@@ -8,6 +8,11 @@
       "path": "/api/user/:id",
       "middlewares": ["authorize", "database"],
       "func": "user"
+    },
+    {
+      "path": "/api/users",
+      "type": "proxy",
+      "endpoint": "https://jsonplaceholder.typicode.com/users"
     }
   ],
   "POST": [

@@ -13,6 +13,7 @@ const config = {
   ],
   API_CONFIG_PATH: path.join(__dirname, "api.json"),
   HANDLER_PATH: path.join(__dirname, "handlers", "http"),
+  CORE_HANDLER_PATH: path.join(__dirname, "core", "handlers", "http"),
   MIDDLEWARE_PATH: path.join(__dirname, "middlewares")
 };
 

@@ -3,7 +3,12 @@
 const fs = require("fs");
 const path = require("path");
 
-const { HANDLER_PATH, MIDDLEWARE_PATH, API_CONFIG_PATH } = require("../config");
+const {
+  HANDLER_PATH,
+  CORE_HANDLER_PATH,
+  MIDDLEWARE_PATH,
+  API_CONFIG_PATH
+} = require("../config");
 
 const core = {
   getHandlers: () => {
@@ -20,6 +25,28 @@ const core = {
         fs.readdirSync(path.join(HANDLER_PATH, method)).forEach(fp => {
           const func = fp.split(".")[0];
           handlers[method][func] = require(path.join(HANDLER_PATH, method, fp));
+        });
+      });
+    return handlers;
+  },
+
+  getCoreHandlers: () => {
+    const handlers = {};
+    fs.readdirSync(CORE_HANDLER_PATH)
+      .map(dirOrFile => {
+        if (fs.statSync(path.join(CORE_HANDLER_PATH, dirOrFile)).isDirectory())
+          return dirOrFile;
+      })
+      .filter(dir => !!dir)
+      .forEach(method => {
+        handlers[method] = {};
+        fs.readdirSync(path.join(CORE_HANDLER_PATH, method)).forEach(fp => {
+          const func = fp.split(".")[0];
+          handlers[method][func] = require(path.join(
+            CORE_HANDLER_PATH,
+            method,
+            fp
+          ));
         });
       });
     return handlers;
