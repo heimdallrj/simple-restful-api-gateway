@@ -1,12 +1,30 @@
 const express = require("express");
-const app = express();
+const logger = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const compression = require("compression");
 
 const { getHandlers, getMiddlewares, getRouteConfigs } = require("./core");
-const { PORT } = require("./env");
+const { PORT } = require("./config");
 
+// Create app instance.
+const app = express();
+
+const middlewares = getMiddlewares();
 const routeConfigs = getRouteConfigs();
 const handlers = getHandlers();
-const middlewares = getMiddlewares();
+
+// Initializing default middlewares
+app.use(cors());
+app.use(compression());
+app.use(logger("dev"));
+app.use(middlewares.config);
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 
 const methods = Object.keys(routeConfigs);
 

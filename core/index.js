@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const { HANDLER_PATH, MIDDLEWARE_PATH, API_CONFIG_PATH } = require("../env");
+const { HANDLER_PATH, MIDDLEWARE_PATH, API_CONFIG_PATH } = require("../config");
 
 const core = {
   getHandlers: () => {

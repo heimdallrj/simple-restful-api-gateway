@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = require("../../../env");
-
 const authenticate = (req, res) => {
+  const { SECRET_KEY } = req.config;
   const user = req.user;
 
   // jwt.sign({ user }, env.SECRET_KEY, { expiresIn: "30s" }, (err, token) => {
