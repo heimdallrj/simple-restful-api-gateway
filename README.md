@@ -2,17 +2,22 @@
 
 JSON-based configurable RESTful API Gateway Project.
 
-You just need to update `api.json` and put respective logics in `handles/http/<get|post|put|delete|patch>` to enable the endpoint. If you need to add a new middleware, please put it in `middlewares` directory.
+You just need to update `routes.json` and put respective logics in `handles/http/<get|post|put|delete|patch>` to enable the endpoint. If you need to add a new middleware, please put it in `middlewares` directory.
 
 > Follow the naming conventions properly.
 
 See examples here;
 
-**api.json**
+**routes.json**
 
 ```json
 {
   "GET": [
+    {
+      "path": "/",
+      "type": "static",
+      "entrypoint": "public/"
+    },
     {
       "path": "/api",
       "func": "welcome"
