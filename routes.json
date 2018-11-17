@@ -1,6 +1,11 @@
 {
   "GET": [
     {
+      "path": "/",
+      "type": "static",
+      "entrypoint": "public/"
+    },
+    {
       "path": "/api",
       "func": "welcome"
     },
