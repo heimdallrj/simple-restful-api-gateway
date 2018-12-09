@@ -45,7 +45,7 @@ methods.forEach(methodKey => {
     if (!type || type === "default") {
       const configMiddlewares = config.middlewares || [];
       const middlewareArray = configMiddlewares.map(m => middlewares[m]);
-      app[funcHandler](path, [...middlewareArray], handlers[funcHandler][func]);
+      app[funcHandler](path, middlewareArray, handlers[funcHandler][func]);
     }
 
     if (type === "proxy") {

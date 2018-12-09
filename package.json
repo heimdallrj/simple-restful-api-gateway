@@ -4,8 +4,8 @@
   "description": "Simple RESTful API Gateway",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
-    "dev": "nodemon ./index.js"
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js"
   },
   "author": "thinkholic <mailtokasun@gmail.com>",
   "license": "MIT",
